@@ -243,7 +243,7 @@ def plot_data_map(dataframe: pd.DataFrame,
                   show_hist: bool = False,
                   max_instances_to_plot = 55000):
     # Set style.
-    sns.set(style='whitegrid', font_scale=1.6, font='Arial', context='paper')
+    sns.set(style='whitegrid', font_scale=1.6, context='paper')
     logger.info(f"Plotting figure for {title} using the {model} model ...")
 
     dataframe.to_json('dataframe.json')
@@ -270,8 +270,8 @@ def plot_data_map(dataframe: pd.DataFrame,
 
     # Make the scatterplot.
     # Choose a palette.
-    pal = sns.diverging_palette(260, 15, n=num_hues, sep=10, center="dark")
     labels = ["0.0", "0.1", "0.2", "0.3", "0.4", "0.5", "0.6", "0.7", "0.8", "0.9", "1.0"]
+    pal = sns.diverging_palette(260, 15, n=len(labels), sep=10, center="dark")
     plot = sns.scatterplot(x=main_metric,
                            y=other_metric,
                            ax=ax0,
