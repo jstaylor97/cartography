@@ -243,9 +243,10 @@ def plot_data_map(dataframe: pd.DataFrame,
                   show_hist: bool = False,
                   max_instances_to_plot = 55000):
     # Set style.
-    sns.set(style='whitegrid', font_scale=1.6, font='Georgia', context='paper')
+    sns.set(style='whitegrid', font_scale=1.6, font='Arial', context='paper')
     logger.info(f"Plotting figure for {title} using the {model} model ...")
 
+    dataframe.to_json('dataframe.json')
     # Subsample data to plot, so the plot is not too busy.
     dataframe = dataframe.sample(n=max_instances_to_plot if dataframe.shape[0] > max_instances_to_plot else len(dataframe))
 
@@ -270,15 +271,25 @@ def plot_data_map(dataframe: pd.DataFrame,
     # Make the scatterplot.
     # Choose a palette.
     pal = sns.diverging_palette(260, 15, n=num_hues, sep=10, center="dark")
-
+    labels = ["0.0", "0.1", "0.2", "0.3", "0.4", "0.5", "0.6", "0.7", "0.8", "0.9", "1.0"]
     plot = sns.scatterplot(x=main_metric,
                            y=other_metric,
                            ax=ax0,
                            data=dataframe,
                            hue=hue,
+                           hue_order=labels,
                            palette=pal,
                            style=style,
-                           s=30)
+                           s=30,
+                           picker=True)
+    # plot = sns.scatterplot(x=main_metric,
+    #                        y=other_metric,
+    #                        ax=ax0,
+    #                        data=dataframe,
+    #                        hue=hue,
+    #                        palette=pal,
+    #                        style=style,
+    #                        s=30)
 
     # Annotate Regions.
     bb = lambda c: dict(boxstyle="round,pad=0.3", ec=c, lw=2, fc="white")
@@ -321,7 +332,8 @@ def plot_data_map(dataframe: pd.DataFrame,
         plott1[0].set_xlabel('variability')
         plott1[0].set_ylabel('density')
 
-        plot2 = sns.countplot(x="correct.", data=dataframe, ax=ax3, color='#86bf91')
+        # plot2 = sns.countplot(x="correct.", data=dataframe, ax=ax3, color='#86bf91')
+        plot2 = sns.histplot(x="correct.", data=dataframe, binwidth=0.1, ax=ax3, color='#86bf91')
         ax3.xaxis.grid(True) # Show the vertical gridlines
 
         plot2.set_title('')
