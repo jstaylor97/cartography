@@ -333,7 +333,7 @@ def plot_data_map(dataframe: pd.DataFrame,
         plott1[0].set_ylabel('density')
 
         # plot2 = sns.countplot(x="correct.", data=dataframe, ax=ax3, color='#86bf91')
-        plot2 = sns.histplot(x="correct.", data=dataframe, binwidth=0.1, ax=ax3, color='#86bf91')
+        plot2 = sns.histplot(x="corr_frac", data=dataframe, binwidth=0.1, ax=ax3, color='#86bf91')
         ax3.xaxis.grid(True) # Show the vertical gridlines
 
         plot2.set_title('')
