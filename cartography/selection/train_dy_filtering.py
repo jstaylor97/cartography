@@ -311,7 +311,7 @@ def plot_data_map(dataframe: pd.DataFrame,
         legend = plot.legend(ncol=1, bbox_to_anchor=[0.175, 0.5], loc='right')
     else:
         legend = plot.legend(fancybox=True, shadow=True,  ncol=1)
-    legend.set_title("Correct.")
+    legend.set_title("correct.")
     plot.set_xlabel('variability')
     plot.set_ylabel('confidence')
 
